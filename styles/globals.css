@@ -557,3 +557,19 @@ button:disabled {
   width: 24px;
   height: 24px
 }
+
+.selected__custom-width {
+  width: calc((100% / 3) * 2);
+}
+
+.selected__audio-icon svg {
+  width: 100%;
+  height: 100%;
+  background: #000;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  padding: 4px 4px 4px 6px;
+}

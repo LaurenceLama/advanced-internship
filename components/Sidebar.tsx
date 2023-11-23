@@ -53,21 +53,21 @@ export default function Sidebar() {
         </div>
 
         <div>
-          <a className="flex items-center h-14 text-[#032b41] mb-2 cursor-not-allowed">
+          <a className="flex items-center h-14 text-[#032b41] mb-2 cursor-pointer">
             <div className="bg-transparent w-[5px] h-full mr-4" />
             <div className="icon--scaled flex items-center justify-center mr-2">
               <AiOutlineSetting />
             </div>
             <div>Settings</div>
           </a>
-          <a className="flex items-center h-14 text-[#032b41] mb-2 cursor-not-allowed">
+          <a className="flex items-center h-14 text-[#032b41] mb-2 cursor-pointer">
             <div className="bg-transparent w-[5px] h-full mr-4" />
             <div className="icon--scaled flex items-center justify-center mr-2">
               <AiOutlineQuestionCircle />
             </div>
             <div>Help & Support</div>
           </a>
-          <a className="flex items-center h-14 text-[#032b41] mb-2 cursor-not-allowed">
+          <a className="flex items-center h-14 text-[#032b41] mb-2 cursor-pointer">
             <div className="bg-transparent w-[5px] h-full mr-4" />
             <div className="icon--scaled flex items-center justify-center mr-2">
               <LuLogOut />
