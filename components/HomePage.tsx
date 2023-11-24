@@ -3,9 +3,25 @@ import { BsStarFill, BsStarHalf } from "react-icons/bs";
 import { BiCrown } from "react-icons/bi";
 import { RiLeafLine } from "react-icons/ri";
 import { useEffect, useState } from "react";
+import AuthModal from "./modal/AuthModal";
+import { openLoginModal } from "@/redux/ModalSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/router";
 
 export default function HomePage() {
   const [delay, setDelay] = useState<number>(1);
+  const dispatch = useDispatch()
+
+  const router = useRouter();
+  const user = useSelector((state: any) => state.user);
+
+  useEffect(() => {
+    if (user.email === null) {
+      return;
+    } else {
+      router.push("/for-you");
+    }
+  }, [user]);
 
   useEffect(() => {
     const greenTextActive = () => {
@@ -21,13 +37,19 @@ export default function HomePage() {
 
   return (
     <div className="body">
+      <AuthModal />
       <nav className="nav">
         <div className="nav__wrapper">
           <figure className="nav__img--mask">
             <img className="nav__img" src="logo.png" alt="logo" />
           </figure>
           <ul className="nav__list--wrapper">
-            <li className="nav__list nav__list--login">Login</li>
+            <li
+              className="nav__list nav__list--login"
+              onClick={() => dispatch(openLoginModal())}
+            >
+              Login
+            </li>
             <li className="nav__list nav__list--mobile">About</li>
             <li className="nav__list nav__list--mobile">Contact</li>
             <li className="nav__list nav__list--mobile">Help</li>
@@ -50,7 +72,12 @@ export default function HomePage() {
                   <br className="remove--tablet" />
                   and even people who don’t like to read.
                 </div>
-                <button className="btn home__cta--btn">Login</button>
+                <button
+                  className="btn home__cta--btn"
+                  onClick={() => dispatch(openLoginModal())}
+                >
+                  Login
+                </button>
               </div>
               <figure className="landing__image--mask">
                 <img src="landing.png" alt="landing" />
@@ -186,28 +213,46 @@ export default function HomePage() {
                 </div>
               </div>
               <div className="statistics__content--header statistics__content--header-second">
-                <div className={`statistics__heading ${
+                <div
+                  className={`statistics__heading ${
                     delay === 0 && `statistics__heading--active`
-                  } `}>Expand your learning</div>
-                <div className={`statistics__heading ${
+                  } `}
+                >
+                  Expand your learning
+                </div>
+                <div
+                  className={`statistics__heading ${
                     delay === 1 && `statistics__heading--active`
-                  } `}>Accomplish your goals</div>
-                <div className={`statistics__heading ${
+                  } `}
+                >
+                  Accomplish your goals
+                </div>
+                <div
+                  className={`statistics__heading ${
                     delay === 2 && `statistics__heading--active`
-                  } `}>
+                  } `}
+                >
                   Strengthen your vitality
                 </div>
-                <div className={`statistics__heading ${
+                <div
+                  className={`statistics__heading ${
                     delay === 3 && `statistics__heading--active`
-                  } `}>
+                  } `}
+                >
                   Become a better caregiver
                 </div>
-                <div className={`statistics__heading ${
+                <div
+                  className={`statistics__heading ${
                     delay === 4 && `statistics__heading--active`
-                  } `}>Improve your mood</div>
-                <div className={`statistics__heading ${
+                  } `}
+                >
+                  Improve your mood
+                </div>
+                <div
+                  className={`statistics__heading ${
                     delay === 5 && `statistics__heading--active`
-                  } `}>
+                  } `}
+                >
                   Maximize your abilities
                 </div>
               </div>

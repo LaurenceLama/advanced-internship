@@ -29,8 +29,8 @@ export default function Selected() {
       "https://us-central1-summaristt.cloudfunctions.net/getBooks?status=selected"
     );
     const data = await response.json()
-    const selected = data[0]
-    setSelected(selected)
+    const selectedData = data[0]
+    setSelected(selectedData)
   }
 
   useEffect(() => {

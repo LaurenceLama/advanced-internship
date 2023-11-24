@@ -41,6 +41,10 @@ button:disabled {
   opacity: 0.65;
 }
 
+input {
+  outline: none;
+}
+
 .row {
   max-width: 1070px;
   width: 100%;
@@ -572,4 +576,18 @@ button:disabled {
   align-items: center;
   border-radius: 50%;
   padding: 4px 4px 4px 6px;
+}
+
+.image--full svg {
+  width: 100%;
+  height: 100%;
+}
+
+.auth__separator::after,
+.auth__separator::before {
+  content: '';
+  display: block;
+  flex-grow: 1;
+  height: 1px;
+  background: #bac8ce;
 }
