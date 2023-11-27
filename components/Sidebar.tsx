@@ -7,24 +7,19 @@ import {
 import { BsBookmark, BsPen } from "react-icons/bs";
 import { LuLogOut } from "react-icons/lu";
 import { useDispatch, useSelector } from "react-redux";
-import SideBarModal from "./modal/SideBarModal";
-import { openLoginModal, openSideBarModal } from "@/redux/ModalSlice";
-import { getAuth } from "firebase/auth";
-import { initFirebase } from "@/firebase";
+import { openLoginModal } from "@/redux/modalSlice";
 import { useRouter } from "next/router";
-
+import { auth } from "@/firebase";
 
 export default function Sidebar() {
   const router = useRouter();
   const user = useSelector((state: any) => state.user);
-  
+
   const dispatch = useDispatch();
-  const app = initFirebase();
-  const auth = getAuth(app);
 
   function handleSignOut() {
     if (user.email === null) {
-      dispatch(openSideBarModal());
+      dispatch(openLoginModal());
     } else {
       auth.signOut();
       router.reload();
