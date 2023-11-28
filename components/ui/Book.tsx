@@ -1,23 +1,7 @@
+import { BookObject } from "@/bookObject";
 import { AiOutlineClockCircle, AiOutlineStar } from "react-icons/ai";
+import { useSelector } from "react-redux";
 
-interface Book {
-  id: string;
-  author: string;
-  title: string;
-  subTitle: string;
-  imageLink: string;
-  audioLink: string;
-  totalRating: Number;
-  averageRating: Number;
-  keyIdeas: Number;
-  type: string;
-  status: string;
-  subscriptionRequired: boolean;
-  summary: string;
-  tags: string[];
-  bookDescription: string;
-  authorDescription: string;
-}
 export default function Book({
   id,
   title,
@@ -26,20 +10,27 @@ export default function Book({
   averageRating,
   imageLink,
   subscriptionRequired,
-}: Book) {
+}: BookObject) {
+  const user = useSelector((state: any) => state.user);
+
   return (
     <a
-      href="for-you"
+      href={`/book/${id}`}
       className="relative snap-start p-3 pt-8 no-underline rounded 
     max-w-[200px] w-full hover:bg-[#f1f6f4]"
     >
-      {/* Some books need premium */}
-      <div
-        className="absolute top-0 right-0 bg-[#032b41] text-white text-[10px]
+      {/* maybe the user.premium is a falsy value?? thats why there is ! */}
+      {/* user.textRightHere - textRightHere could be anything just to trigger the premium status of the books */}
+      {/* so in order to define books if they need premium, it shall be executed with a falsy value? idk */}
+      {!user.requiresPremium && (subscriptionRequired && 
+        <div
+          className="absolute top-0 right-0 bg-[#032b41] text-white text-[10px]
        w-fit h-[18px] px-2 flex items-center rounded-[20px]"
-      >
-        Premium
-      </div>
+        >
+          Premium
+        </div>
+      )}
+
       <figure className="mb-2 h-[172px] w-[172px]">
         <img className="block w-full h-full" src={imageLink} alt="book image" />
       </figure>
@@ -61,7 +52,6 @@ export default function Book({
             <AiOutlineStar />
           </div>
 
-          {/* this how to display number into strings so no error */}
           <div>{`${averageRating}`}</div>
         </div>
       </div>

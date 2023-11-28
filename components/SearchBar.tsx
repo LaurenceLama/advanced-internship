@@ -2,25 +2,6 @@ import { useState } from "react";
 import { BiSearch } from "react-icons/bi";
 import { FiX } from "react-icons/fi";
 
-interface Book {
-  id: string;
-  author: string;
-  title: string;
-  subTitle: string;
-  imageLink: string;
-  audioLink: string;
-  totalRating: Number;
-  averageRating: Number;
-  keyIdeas: Number;
-  type: string;
-  status: string;
-  subscriptionRequired: boolean;
-  summary: string;
-  tags: string[];
-  bookDescription: string;
-  authorDescription: string;
-}
-
 export default function SearchBar() {
   const [input, setInput] = useState<any>("");
 

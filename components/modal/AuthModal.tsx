@@ -93,8 +93,6 @@ export default function AuthModal() {
       <Modal
         open={isOpen}
         onClose={() => dispatch(closeLoginModal())}
-
-        // Instead of styling divs inside the modal, STYLE THE MODAL instead, para di matabunan yung dapat pinipindot pag nagoonclose
         className="fixed top-0 left-0 h-full flex justify-center 
           items-center flex-col w-full bg-[rgba(0,0,0,0.5)]"
       >
@@ -169,8 +167,6 @@ export default function AuthModal() {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </form>
-
-            {/* Sign in/up button only works if it is OUTSIDE THE FORM */}
             <button
               className="bg-[#2bd97c] text-#032b41] w-full h-10 rounded 
                 text-base transition duration-200 hover:bg-[#20ba68] flex 

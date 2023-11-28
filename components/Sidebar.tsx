@@ -10,8 +10,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { openLoginModal } from "@/redux/modalSlice";
 import { useRouter } from "next/router";
 import { auth } from "@/firebase";
+import logo from '../public/logo.png'
+import Image from "next/image";
 
-export default function Sidebar() {
+interface route {
+  route: number;
+}
+
+export default function Sidebar({ route }: route) {
   const router = useRouter();
   const user = useSelector((state: any) => state.user);
 
@@ -32,7 +38,7 @@ export default function Sidebar() {
         top-0 left-0 h-screen"
     >
       <div className="flex items-center justify-center h-[60px] pt-4 max-w-[160px] mx-auto">
-        <img src="logo.png" className="w-full h-10" alt="logo" />
+        <Image src={logo} className="w-full h-10" alt="logo" />
       </div>
 
       <div className="flex flex-col justify-between pb-5 overflow-y-auto h-[93.5%]">
@@ -40,8 +46,13 @@ export default function Sidebar() {
           <a
             className="flex items-center h-14 text-[#032b41] hover:bg-[#f0efef] 
           mb-2 cursor-pointer"
+            onClick={() => router.push("/for-you")}
           >
-            <div className="bg-[#2bd97c] w-[5px] h-full mr-4" />
+            <div
+              className={`${
+                route === 1 && `activeCurrentTab`
+              } w-[5px] h-full mr-4`}
+            />
             <div className="icon--scaled flex items-center justify-center mr-2">
               <AiOutlineHome />
             </div>
@@ -50,8 +61,13 @@ export default function Sidebar() {
           <a
             className="flex items-center h-14 text-[#032b41] hover:bg-[#f0efef] 
           mb-2 cursor-pointer"
+            onClick={() => router.push("/library")}
           >
-            <div className="bg-transparent w-[5px] h-full mr-4" />
+            <div
+              className={`${
+                route === 2 && `activeCurrentTab`
+              }bg-transparent w-[5px] h-full mr-4`}
+            />
             <div className="icon--scaled flex items-center justify-center mr-2">
               <BsBookmark />
             </div>

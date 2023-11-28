@@ -556,14 +556,20 @@ input {
   }
 }
 
+/*
+
+Reused and custom styles
+  
+*/
 
 .icon--scaled svg {
   width: 24px;
-  height: 24px
+  height: 24px;
 }
 
-.selected__custom-width {
-  width: calc((100% / 3) * 2);
+.image--full svg {
+  width: 100%;
+  height: 100%;
 }
 
 .selected__audio-icon svg {
@@ -578,16 +584,76 @@ input {
   padding: 4px 4px 4px 6px;
 }
 
-.image--full svg {
-  width: 100%;
-  height: 100%;
+.selected__custom-width {
+  width: calc((100% / 3) * 2);
+}
+
+.summary__custom-width {
+  height: calc(100vh - 160px);
 }
 
 .auth__separator::after,
 .auth__separator::before {
-  content: '';
+  content: "";
   display: block;
   flex-grow: 1;
   height: 1px;
   background: #bac8ce;
 }
+
+.activeCurrentTab {
+  background-color: #2bd97c;
+}
+
+.track--wrapper > div {
+  width: calc(100% / 3);
+}
+
+/* 
+
+Custom Input range 
+
+*/
+
+input[type="range"] {
+    --range-progress: 0;
+    -webkit-appearance: none;
+    appearance: none;
+    position: relative;
+    background: #ccc;
+    width: 100%;
+    height: 2px;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+  
+  /* played progress length */
+  input[type="range"]::before {
+    content: "";
+    height: 2px;
+    background: #2BD97C;
+    width: var(--range-progress);
+    border-bottom-left-radius: 2px;
+    border-top-left-radius: 2px;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  /* slider thumb */
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    border: none;
+    background-color: #2BD97C;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  /* dragging thumb */
+  input[type="range"]:active::-webkit-slider-thumb {
+    transform: scale(1.2);
+  }
+  

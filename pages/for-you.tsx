@@ -9,7 +9,7 @@ export default function Foryou() {
 
   return (
     <div className="relative flex flex-col md:ml-[200px]">
-      <Sidebar />
+      <Sidebar route={1} />
       <SearchBar />
       <AuthModal />
       <div className="max-w-[1100px] w-full px-6 mx-auto">
