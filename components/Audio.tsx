@@ -43,30 +43,38 @@ export default function Audio() {
     }
   }, []);
 
-   useEffect(() => {
-     if (playing) {
-       audioRef?.current?.play();
-     } else {
-       audioRef?.current?.pause();
-     }
-     playAnimationRef.current = requestAnimationFrame(repeat);
-   }, [playing, audioRef, repeat]);
+  useEffect(() => {
+    if (playing) {
+      audioRef.current.play();
+    } else {
+      audioRef.current.pause();
+    }
+    playAnimationRef.current = requestAnimationFrame(repeat);
+  }, [playing, audioRef, repeat]);
 
   const togglePlayPause = () => {
     setPlaying((prev) => !prev);
   };
 
-  let time = audioRef?.current?.currentTime;
 
   const skipForward = () => {
-    time += 10;
+    audioRef.current.currentTime += 10;
   };
 
   const skipBackward = () => {
-    time -= 10;
+    audioRef.current.currentTime -= 10;
   };
 
-  //   do this fetching teknik on other sections like suggested and the Book.tsx it fetches better
+  const onLoadedMetadata = () => {
+    const seconds = audioRef.current.duration;
+    setTimeLeft(seconds);
+    progressBarRef.current.max = seconds;
+  };
+
+  const handleProgressChange = () => {
+    audioRef.current.currentTime = progressBarRef.current.value;
+  };
+
   useEffect(() => {
     if (id) {
       const fetchAudio = async () => {
@@ -78,8 +86,6 @@ export default function Audio() {
       fetchAudio();
     }
   }, [id]);
-
-    //   this'll take some time higgggghhhgghghgh
 
   return (
     <div
@@ -143,11 +149,14 @@ export default function Audio() {
         <input
           type="range"
           ref={progressBarRef}
+          onChange={handleProgressChange}
           className="rounded-lg h-1 max-w-[300px] w-full cursor-pointer"
         />
         <audio
           src={data?.audioLink}
+          ref={audioRef}
           className="rounded-lg h-1 max-w-[300px] w-full cursor-pointer"
+          onLoadedMetadata={onLoadedMetadata}
         ></audio>
 
         <div className="text-sm text-white">{formatTime(timeLeft)}</div>

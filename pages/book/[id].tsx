@@ -1,8 +1,11 @@
+import { BookObject } from "@/bookObject";
 import SearchBar from "@/components/SearchBar";
 import Sidebar from "@/components/Sidebar";
 import AuthModal from "@/components/modal/AuthModal";
+import { db } from "@/firebase";
 import { openLoginModal } from "@/redux/modalSlice";
 import axios from "axios";
+import { DocumentData, deleteDoc, doc, setDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { AiOutlineClockCircle, AiOutlineStar } from "react-icons/ai";
@@ -11,42 +14,14 @@ import { BsBookmark, BsMic } from "react-icons/bs";
 import { VscBook } from "react-icons/vsc";
 import { useDispatch, useSelector } from "react-redux";
 
-interface Book {
-  id: string;
-  author: string;
-  title: string;
-  subTitle: string;
-  imageLink: string;
-  audioLink: string;
-  totalRating: Number;
-  averageRating: Number;
-  keyIdeas: Number;
-  type: string;
-  status: string;
-  subscriptionRequired: boolean;
-  summary: string;
-  tags: string[];
-  bookDescription: string;
-  authorDescription: string;
-}
-
 export default function Id() {
-  const [book, setBook] = useState<Book>();
+  const [book, setBook] = useState<BookObject>();
 
   const router = useRouter();
   const { id } = router.query;
 
   const user = useSelector((state: any) => state.user);
   const dispatch = useDispatch();
-
-  //   host this and check if this api fetches properly
-  //  so far, api fetches badly when reloading page
-  async function fetchBook() {
-    const { data } = await axios.get(
-      `https://us-central1-summaristt.cloudfunctions.net/getBook?id=${id}`
-    );
-    setBook(data);
-  }
 
   function handlePlay() {
     if (user.email === null) {
@@ -58,7 +33,15 @@ export default function Id() {
   }
 
   useEffect(() => {
-    fetchBook();
+    if (id) {
+      const fetchBook = async () => {
+        const { data } = await axios.get(
+          `https://us-central1-summaristt.cloudfunctions.net/getBook?id=${id}`
+        );
+        setBook(data);
+      };
+      fetchBook();
+    }
   }, [id]);
 
   return (

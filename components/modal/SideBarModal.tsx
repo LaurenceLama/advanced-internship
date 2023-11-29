@@ -14,7 +14,7 @@ import {
 import { auth } from "@/firebase";
 import { setUser } from "@/redux/userSlice";
 
-export default function AuthModal() {
+export default function SideBarModal() {
   const [signup, setSignup] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
