@@ -1,17 +1,15 @@
 interface skeleton {
   width: string | number;
   height: string | number;
-  borderRadius: number | undefined;
 }
 
-const Skeleton = ({ width, height, borderRadius }: skeleton) => {
+const Skeleton = ({ width, height }: skeleton) => {
   return (
     <div
       className="skeleton-box"
       style={{
         width,
         height,
-        borderRadius,
       }}
     ></div>
   );

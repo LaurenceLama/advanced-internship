@@ -4,12 +4,28 @@ import { BiSearch } from "react-icons/bi";
 import { FiX } from "react-icons/fi";
 import SearchBook from "./ui/SearchBook";
 import Skeleton from "./ui/Skeleton";
+import { AiOutlineMenu } from "react-icons/ai";
+import { useDispatch, useSelector } from "react-redux";
+import { closeSidebarModal, openSidebarModal } from "@/redux/modalSlice";
 
 export default function SearchBar() {
   const [input, setInput] = useState<any>("");
   const [data, setData] = useState<BookObject[]>();
   const [skelLoad, setSkelLoad] = useState<boolean>(false);
 
+  const sideBar = useSelector((state: any) => state.modal.sidebarModal);
+  const dispatch = useDispatch();
+
+  const mobileIsOpen = useSelector((state: any) => state.modal.sidebarModal);
+
+  function handleSideBar() {
+    if (mobileIsOpen === false) {
+      dispatch(openSidebarModal());
+    } else {
+      dispatch(closeSidebarModal());
+    }
+  };
+  
   function handleDelete() {
     if (input.length !== 0) {
       setInput("");
@@ -63,6 +79,14 @@ export default function SearchBar() {
               </div>
             </div>
           </div>
+
+          <div
+            className="hidden items-center justify-center cursor-pointer 
+          max-[768px]:flex"
+            onClick={handleSideBar}
+          >
+            <AiOutlineMenu size={24} />
+          </div>
         </div>
         {input &&
           (!skelLoad ? (
@@ -97,7 +121,7 @@ export default function SearchBar() {
             <div className="search__books--wrapper">
               {new Array(4).fill(0).map((_, index) => (
                 <div className="p-2" key={index}>
-                  <Skeleton width="100%" height={120} borderRadius={0} />
+                  <Skeleton width="100%" height={120} />
                 </div>
               ))}
             </div>

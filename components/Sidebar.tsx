@@ -12,6 +12,7 @@ import { useRouter } from "next/router";
 import { auth } from "@/firebase";
 import logo from "../public/logo.png";
 import Image from "next/image";
+import { signOut } from "firebase/auth";
 
 interface route {
   route: number;
@@ -27,7 +28,7 @@ export default function Sidebar({ route }: route) {
     if (user.email === null) {
       dispatch(openLoginModal());
     } else {
-      auth.signOut();
+      signOut(auth);
       router.reload();
     }
   }
@@ -43,8 +44,8 @@ export default function Sidebar({ route }: route) {
 
       <div
         className={`flex flex-col justify-between pb-5 overflow-y-auto h-[93.5%] 
-      ${route === 0.1 && `player__sidebar--height`}`}
-      // change numbering later
+      ${route === 0 && `player__sidebar--height`}`}
+      // change numbering now
       >
         <div className="flex-grow flex-shrink basis-0 mt-10">
           <a
@@ -101,7 +102,7 @@ export default function Sidebar({ route }: route) {
           >
             <div
               className={`${
-                route === 4 && `activeCurrentTab`
+                route === 3 && `activeCurrentTab`
               } bg-transparent w-[5px] h-full mr-4`}
             />
             <div className="icon--scaled flex items-center justify-center mr-2">

@@ -1,17 +1,39 @@
 import { BookObject } from "@/bookObject";
 import { AiOutlineClockCircle, AiOutlineStar } from "react-icons/ai";
 import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+
 
 export default function Book({
   id,
   title,
   author,
+  audioLink,
   subTitle,
   averageRating,
   imageLink,
   subscriptionRequired,
 }: BookObject) {
   const user = useSelector((state: any) => state.user);
+  const [duration, setDuration] = useState(0);
+
+  const formatTime = (time: number) => {
+    if (time && !isNaN(time)) {
+      const minutes = Math.floor(time / 60);
+      const formatMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
+      const seconds = Math.floor(time % 60);
+      const formatSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
+      return `${formatMinutes}:${formatSeconds}`;
+    }
+    return "00:00";
+  };
+
+  useEffect(() => {
+    const audio = new Audio(audioLink);
+    audio.onloadedmetadata = () => {
+      setDuration(audio.duration);
+    };
+  }, []);
 
   return (
     <a
@@ -19,10 +41,7 @@ export default function Book({
       className="relative snap-start p-3 pt-8 no-underline rounded 
     max-w-[200px] w-full hover:bg-[#f1f6f4]"
     >
-      {/* maybe the user.premium is a falsy value?? thats why there is ! */}
-      {/* user.textRightHere - textRightHere could be anything just to trigger the premium status of the books */}
-      {/* so in order to define books if they need premium, it shall be executed with a falsy value? idk */}
-      {!user.requiresPremium && (subscriptionRequired && 
+      {subscriptionRequired && !user.premium && (
         <div
           className="absolute top-0 right-0 bg-[#032b41] text-white text-[10px]
        w-fit h-[18px] px-2 flex items-center rounded-[20px]"
@@ -44,7 +63,7 @@ export default function Book({
           <div className="flex w-4 h-4 image--full">
             <AiOutlineClockCircle />
           </div>
-          <div>mejo long</div>
+          <div>{formatTime(duration)}</div>
         </div>
 
         <div className="flex items-center gap-1 text-sm font-light text-[#6b757b]">

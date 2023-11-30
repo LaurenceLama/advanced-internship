@@ -7,12 +7,15 @@ import { useState, useEffect } from "react";
 import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
+  getAuth,
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signInWithPopup,
 } from "firebase/auth";
-import { auth } from "@/firebase";
+import { auth, initFirebase } from "@/firebase";
 import { setUser } from "@/redux/userSlice";
+import { getPremiumStatus } from "@/checkStatus";
+import { useRouter } from "next/router";
 
 export default function AuthModal() {
   const [signup, setSignup] = useState(false);
@@ -21,14 +24,21 @@ export default function AuthModal() {
 
   const gAuthProvider = new GoogleAuthProvider();
 
+  const router = useRouter();
+
+
   const dispatch = useDispatch();
   const isOpen = useSelector((state: any) => state.modal.loginModal);
+
+  const app = initFirebase();
+  const user = useSelector((state: any) => state.user);
 
   async function handleGoogleSignIn() {
     const result = await signInWithPopup(auth, gAuthProvider);
     const gUser = result.user;
     if (gUser) {
       dispatch(closeLoginModal());
+      router.push('/for-you')
     }
   }
 
@@ -37,6 +47,7 @@ export default function AuthModal() {
       .then((userDetails) => {
         const currentUser = userDetails.user;
         dispatch(closeLoginModal());
+        router.push("/for-you");
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -49,6 +60,7 @@ export default function AuthModal() {
       .then((userDetails) => {
         const currentUser = userDetails.user;
         dispatch(closeLoginModal());
+        router.push("/for-you");
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -65,10 +77,11 @@ export default function AuthModal() {
       .then((userDetails) => {
         const currentUser = userDetails.user;
         dispatch(closeLoginModal());
+        router.push("/for-you");
       })
       .catch((error) => {
         const errorMessage = error.message;
-        alert(`Sign-in failed because of ${errorMessage}`);
+        alert(`Sign-up failed because of ${errorMessage}`);
       });
   }
 
@@ -86,6 +99,23 @@ export default function AuthModal() {
     return unsubscribe;
   }, []);
 
+  /* Book Pill function */
+  useEffect(() => {
+    const checkPremium = async () => {
+      const newPremiumStatus = auth.currentUser
+        ? await getPremiumStatus(app)
+        : false;
+      dispatch(
+        setUser({
+          email: user.email,
+          uid: user.uid,
+          premium: newPremiumStatus,
+        })
+      );
+    };
+    checkPremium();
+  }, []);
+
   return (
     <>
       <Modal
@@ -96,7 +126,7 @@ export default function AuthModal() {
       >
         <div
           className="relative max-w-[400px] bg-white rounded-lg 
-            shadow-[0_0_10px_rgba(0,0,0,0.5)] w-full"
+            shadow-[0_0_10px_rgba(0,0,0,0.5)] w-full outline-0"
         >
           <div className="pt-12 px-8 pb-6">
             <div className="text-center font-bold text-[#032b41] text-xl mb-6">
@@ -193,6 +223,7 @@ export default function AuthModal() {
           <div
             className="absolute top-3 right-3 flex cursor-pointer transition 
             duration-200 hover:opacity-50 icon--scaled"
+            onClick={() => dispatch(closeLoginModal())}
           >
             <FiX />
           </div>

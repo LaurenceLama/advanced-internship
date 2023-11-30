@@ -1,11 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// export interface ModalState {
-//   loginModal: boolean;
-// }
-
 const initialState = {
   loginModal: false,
+  sidebarModal: false,
 };
 
 export const modalSlice = createSlice({
@@ -18,9 +15,20 @@ export const modalSlice = createSlice({
     closeLoginModal: (state) => {
       state.loginModal = false;
     },
+    openSidebarModal: (state) => {
+      state.sidebarModal = true;
+    },
+    closeSidebarModal: (state) => {
+      state.sidebarModal = false;
+    },
   },
 });
 
-export const { openLoginModal, closeLoginModal } = modalSlice.actions;
+export const {
+  openLoginModal,
+  closeLoginModal,
+  openSidebarModal,
+  closeSidebarModal,
+} = modalSlice.actions;
 
 export default modalSlice.reducer;

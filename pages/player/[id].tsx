@@ -2,6 +2,7 @@ import { BookObject } from "@/bookObject";
 import Audio from "@/components/Audio";
 import SearchBar from "@/components/SearchBar";
 import Sidebar from "@/components/Sidebar";
+import SidebarModal from "@/components/modal/SidebarModal";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -27,7 +28,8 @@ export default function Id() {
   return (
     <div className="relative flex flex-col md:ml-[200px]">
       <SearchBar />
-      <Sidebar route={0.1} />
+      <Sidebar route={0} />
+      <SidebarModal route={0} />
       <div
         className="relative w-full overflow-y-auto
           summary__custom-width"
@@ -35,8 +37,8 @@ export default function Id() {
         <audio src={summ?.audioLink}></audio>
         <div className="p-6 max-w-[800px] mx-auto whitespace-pre-line">
           <div
-            className="text-[#032b41] text-2xl border-b border-[#e1e7ea]
-                mb-8 pb-4 leading-normal"
+            className="text-[#032b41] md:text-2xl text-xl border-b border-[#e1e7ea]
+            mb-8 pb-4 leading-normal"
           >
             <b>{summ?.title}</b>
           </div>

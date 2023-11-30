@@ -90,7 +90,8 @@ export default function Audio() {
   return (
     <div
       className="fixed w-full h-20 mt-auto flex items-center justify-between 
-        bg-[#042330] px-10 bottom-0 left-0 z-[9998] track--wrapper"
+        bg-[#042330] px-10 bottom-0 left-0 z-[998] track--wrapper max-[768px]:h-[180px]
+      max-[768px]:py-4 max-[768px]:px-6 max-[768px]:flex-col"
     >
       <audio src={data?.audioLink} />
 
