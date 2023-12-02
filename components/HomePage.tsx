@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import AuthModal from "./modal/AuthModal";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
-import { openLoginModal } from "../redux/modalSlice";
+import { openLoginModal } from "@/redux/modalSlice";
 
 export default function HomePage() {
   const [delay, setDelay] = useState<number>(1);
