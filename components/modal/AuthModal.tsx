@@ -110,7 +110,7 @@ export default function AuthModal() {
       );
     });
     return unsubscribe;
-  }, []);
+  }, [dispatch]);
 
   /* Book Pill function */
   useEffect(() => {

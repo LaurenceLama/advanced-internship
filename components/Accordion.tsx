@@ -67,7 +67,7 @@ export default function Accordion() {
       <div className="accordion__card" onClick={() => handleTabChange(3)}>
         <div className="accordion__header">
           <div className="accordion__title">
-            What's included in the Premium plan?
+            What is included in the Premium plan?
           </div>
           <div
             className={

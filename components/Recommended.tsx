@@ -26,7 +26,7 @@ export default function Recommended() {
         Recommended For You
       </div>
       <div className="font-light text-[#394547] mb-7">
-        We think you'll like these
+        We think you will like these
       </div>
 
       <div className="flex mb-8 gap-4">

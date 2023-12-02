@@ -42,7 +42,7 @@ export default function Audio() {
       );
       playAnimationRef.current = requestAnimationFrame(repeat);
     }
-  }, []);
+  }, [timeLeft]);
 
   useEffect(() => {
     if (playing) {

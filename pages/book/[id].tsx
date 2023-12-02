@@ -6,6 +6,7 @@ import SidebarModal from "@/components/modal/SidebarModal";
 import Skeleton from "@/components/ui/Skeleton";
 import { openLoginModal } from "@/redux/modalSlice";
 import axios from "axios";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { AiOutlineClockCircle, AiOutlineStar } from "react-icons/ai";
@@ -174,7 +175,7 @@ export default function Id() {
                   </div>
 
                   <div className="text-lg text-[#032b41] mb-4 font-semibold">
-                    What's it about?
+                    What is it about?
                   </div>
 
                   <div className="flex flex-wrap gap-4 mb-4">

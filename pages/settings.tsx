@@ -11,7 +11,7 @@ import SidebarModal from "@/components/modal/SidebarModal";
 import { premiumType } from "@/premiumType";
 import Skeleton from "@/components/ui/Skeleton";
 
-export default function settings() {
+export default function Settings() {
   const [skelLoad, setSkelLoad] = useState<boolean>(false);
 
   const dispatch = useDispatch();
@@ -38,7 +38,7 @@ export default function settings() {
     };
     isPremium();
     setSkelLoad(false);
-  }, [app, auth.currentUser?.uid]);
+  }, [app]);
 
   return (
     <div className="relative flex flex-col md:ml-[200px]">

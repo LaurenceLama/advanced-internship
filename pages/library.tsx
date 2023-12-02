@@ -5,8 +5,8 @@ import SidebarModal from "@/components/modal/SidebarModal";
 import { openLoginModal } from "@/redux/modalSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-export default function library() {
-  const dispatch = useDispatch();
+export default function Library() {
+  const dispatch = useDispatch()
   const user = useSelector((state: any) => state.user);
 
   function handleSignIn() {

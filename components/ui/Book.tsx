@@ -33,7 +33,7 @@ export default function Book({
     audio.onloadedmetadata = () => {
       setDuration(audio.duration);
     };
-  }, []);
+  }, [audioLink]);
 
   return (
     <a
