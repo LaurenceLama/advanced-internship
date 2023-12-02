@@ -2,7 +2,7 @@ import { BookObject } from "@/bookObject";
 import Audio from "@/components/Audio";
 import SearchBar from "@/components/SearchBar";
 import Sidebar from "@/components/Sidebar";
-import SidebarModal from "@/components/modal/SidebarModal";
+import SidebarModal from "@/components/SidebarModal";
 import Skeleton from "@/components/ui/Skeleton";
 import axios from "axios";
 import { useRouter } from "next/router";
