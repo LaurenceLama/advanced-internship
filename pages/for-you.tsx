@@ -4,7 +4,7 @@ import Selected from "@/components/Selected";
 import Sidebar from "@/components/Sidebar";
 import Suggested from "@/components/Suggested";
 import AuthModal from "@/components/modal/AuthModal";
-import SidebarModal from "@/components/modal/SidebarModal";
+import SidebarModal from "@/components/SidebarModal";
 
 export default function Foryou() {
   return (
