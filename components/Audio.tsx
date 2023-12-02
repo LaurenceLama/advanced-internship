@@ -8,6 +8,7 @@ import { TbRewindBackward10, TbRewindForward10 } from "react-icons/tb";
 export default function Audio() {
   const [data, setData] = useState<BookObject>();
   const [playing, setPlaying] = useState<Boolean>(false);
+  
 
   const router = useRouter();
   const { id } = router.query;

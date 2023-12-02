@@ -35,8 +35,8 @@ export default function Sidebar({ route }: route) {
 
   return (
     <div
-      className="hidden bg-[#f7faf9] md:inline md:w-[200px] md:min-w-[200px] fixed 
-      top-0 left-0 h-screen"
+      className="bg-[#f7faf9] md:inline md:w-[200px] md:min-w-[200px] fixed 
+      top-0 left-0 h-screen transition-all duration-300 max-[768px]:-translate-x-full"
     >
       <div className="flex items-center justify-center h-[60px] pt-4 max-w-[160px] mx-auto">
         <Image src={logo} className="w-full h-10" alt="logo" />
@@ -45,7 +45,6 @@ export default function Sidebar({ route }: route) {
       <div
         className={`flex flex-col justify-between pb-5 overflow-y-auto h-[93.5%] 
       ${route === 0 && `player__sidebar--height`}`}
-      // change numbering now
       >
         <div className="flex-grow flex-shrink basis-0 mt-10">
           <a

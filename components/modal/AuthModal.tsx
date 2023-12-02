@@ -7,7 +7,6 @@ import { useState, useEffect } from "react";
 import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
-  getAuth,
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signInWithPopup,
@@ -22,10 +21,13 @@ export default function AuthModal() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const [skelLoadGoogle, setSkelLoadGoogle] = useState<boolean>(false);
+  const [skelLoadGuest, setSkelLoadGuest] = useState<boolean>(false);
+  const [skelLoad, setSkelLoad] = useState<boolean>(false);
+
   const gAuthProvider = new GoogleAuthProvider();
 
   const router = useRouter();
-
 
   const dispatch = useDispatch();
   const isOpen = useSelector((state: any) => state.modal.loginModal);
@@ -34,41 +36,50 @@ export default function AuthModal() {
   const user = useSelector((state: any) => state.user);
 
   async function handleGoogleSignIn() {
+    setSkelLoadGoogle(true);
     const result = await signInWithPopup(auth, gAuthProvider);
     const gUser = result.user;
     if (gUser) {
       dispatch(closeLoginModal());
-      router.push('/for-you')
+      router.push("/for-you");
+      setSkelLoadGoogle(false);
     }
   }
 
   function handleGuestSignIn() {
+    setSkelLoadGuest(true);
     signInWithEmailAndPassword(auth, "guest@gmail.com", "guest123")
       .then((userDetails) => {
         const currentUser = userDetails.user;
         dispatch(closeLoginModal());
         router.push("/for-you");
+        setSkelLoadGuest(false);
       })
       .catch((error) => {
         const errorMessage = error.message;
         alert(`Guest login failed because of ${errorMessage}`);
+        setSkelLoadGuest(false);
       });
   }
 
   async function handleSignIn() {
+    setSkelLoad(true);
     await signInWithEmailAndPassword(auth, email, password)
       .then((userDetails) => {
         const currentUser = userDetails.user;
         dispatch(closeLoginModal());
         router.push("/for-you");
+        setSkelLoad(false);
       })
       .catch((error) => {
         const errorMessage = error.message;
         alert(`Sign-in failed because of ${errorMessage}`);
+        setSkelLoad(false);
       });
   }
 
   async function handleSignUp() {
+    setSkelLoad(true);
     const userCredentials = await createUserWithEmailAndPassword(
       auth,
       email,
@@ -78,10 +89,12 @@ export default function AuthModal() {
         const currentUser = userDetails.user;
         dispatch(closeLoginModal());
         router.push("/for-you");
+        setSkelLoad(false);
       })
       .catch((error) => {
         const errorMessage = error.message;
         alert(`Sign-up failed because of ${errorMessage}`);
+        setSkelLoad(false);
       });
   }
 
@@ -137,17 +150,30 @@ export default function AuthModal() {
               <>
                 <button
                   className="relative w-full flex bg-[#3a579d] text-white 
-                justify-center items-center min-w-[180px] h-10 rounded text-base transition 
-                duration-200 hover:bg-[#25396b]"
+                  justify-center items-center min-w-[180px] h-10 rounded text-base transition 
+                  duration-200 hover:bg-[#25396b]"
                   onClick={handleGuestSignIn}
                 >
-                  <figure
-                    className="bg-transparent flex justify-center items-center w-9 
-                  h-9 absolute left-[2px] icon--scaled"
-                  >
-                    <BiSolidUser />
-                  </figure>
-                  <div>Login as a Guest</div>
+                  {!skelLoadGuest ? (
+                    <>
+                      <figure
+                        className="bg-transparent flex justify-center items-center w-9 
+                    h-9 absolute left-[2px] icon--scaled"
+                      >
+                        <BiSolidUser />
+                      </figure>
+                      <div>Login as a Guest</div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="spinLoad--auth">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                      </div>
+                    </>
+                  )}
                 </button>
 
                 <div className="flex items-center my-4 auth__separator">
@@ -164,13 +190,30 @@ export default function AuthModal() {
               duration-200 hover:bg-[#3367d6]"
               onClick={handleGoogleSignIn}
             >
-              <figure
-                className="bg-transparent flex justify-center items-center w-9 
-                h-9 absolute left-[2px] rounded bg-white"
-              >
-                <img className="h-6 w-6" src="../google.png" alt="google.png" />
-              </figure>
-              <div>Login with Google</div>
+              {!skelLoadGoogle ? (
+                <>
+                  <figure
+                    className="bg-transparent flex justify-center items-center w-9 
+                  h-9 absolute left-[2px] rounded bg-white"
+                  >
+                    <img
+                      className="h-6 w-6"
+                      src="../google.png"
+                      alt="google.png"
+                    />
+                  </figure>
+                  <div>Login with Google</div>
+                </>
+              ) : (
+                <>
+                  <div className="spinLoad--auth">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                  </div>
+                </>
+              )}
             </button>
 
             <div className="flex items-center my-4 auth__separator">
@@ -201,7 +244,22 @@ export default function AuthModal() {
                 justify-center items-center min-w-[180px] mt-4"
               onClick={signup ? handleSignUp : handleSignIn}
             >
-              {signup ? "Sign up" : "Login"}
+              {!skelLoad ? (
+                signup ? (
+                  "Sign up"
+                ) : (
+                  "Login"
+                )
+              ) : (
+                <>
+                  <div className="spinLoad--auth">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                  </div>
+                </>
+              )}
             </button>
           </div>
 

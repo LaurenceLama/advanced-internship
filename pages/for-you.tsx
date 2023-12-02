@@ -8,7 +8,10 @@ import SidebarModal from "@/components/modal/SidebarModal";
 
 export default function Foryou() {
   return (
-    <div className="md:relative md:flex md:flex-col md:ml-[200px] max-[768px]:ml-0 max-[768px]:w-full">
+    <div
+      className="md:relative md:flex md:flex-col md:ml-[200px] max-[768px]:ml-0 
+      max-[768px]:w-full transition-all duration-300"
+    >
       <Sidebar route={1} />
       <SidebarModal route={1} />
       <SearchBar />

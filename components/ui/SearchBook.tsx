@@ -34,7 +34,7 @@ export default function SearchBook({
     <div>
       <a
         className={`flex items-center cursor-pointer p-4 gap-6 h-[120px] border-[#e1e7ea]
-        hover:bg-[#f1f6f4] ${id.length === 1 && `border-b`}`}
+        hover:bg-[#f1f6f4] border-b`}
         onClick={() => router.push(`/book/${id}`)}
       >
         <figure className="h-20 w-20 min-w-[80px]">

@@ -13,7 +13,6 @@ export default function SearchBar() {
   const [data, setData] = useState<BookObject[]>();
   const [skelLoad, setSkelLoad] = useState<boolean>(false);
 
-  const sideBar = useSelector((state: any) => state.modal.sidebarModal);
   const dispatch = useDispatch();
 
   const mobileIsOpen = useSelector((state: any) => state.modal.sidebarModal);
@@ -33,6 +32,7 @@ export default function SearchBar() {
   }
 
   useEffect(() => {
+    setSkelLoad(true)
     if (!input) {
       return;
     } else {
@@ -45,6 +45,7 @@ export default function SearchBar() {
           setData(json);
         };
         fetchData();
+        setSkelLoad(false);
       }, 300);
     }
   }, [input]);
@@ -91,7 +92,7 @@ export default function SearchBar() {
         {input &&
           (!skelLoad ? (
             data?.length !== 0 ? (
-              <div className="search__books--wrapper max-[768px]:max-w-[unset] max-[768px]:right-0">
+              <div className="search__books--wrapper max-[768px]:max-w-[unset] max-[768px]:right-0 z-50">
                 {data?.map((data) => (
                   <SearchBook
                     key={data.id}
@@ -120,7 +121,7 @@ export default function SearchBar() {
           ) : (
             <div className="search__books--wrapper">
               {new Array(4).fill(0).map((_, index) => (
-                <div className="p-2" key={index}>
+                <div className="p-[2px]" key={index}>
                   <Skeleton width="100%" height={120} />
                 </div>
               ))}

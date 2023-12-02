@@ -37,7 +37,8 @@ export default function SidebarModal({ route }: route) {
     <>
       <Modal open={mobileIsOpen} onClose={() => dispatch(closeSidebarModal())}>
         <div
-          className="w-[80%] bg-white fixed top-0 left-0 h-screen z-10 outline-0"
+          className={`w-[80%] -translate-x-full bg-white fixed top-0 left-0 h-screen z-10 outline-0
+          transition-all duration-300 ${mobileIsOpen && "translate-x-0"}`}
         >
           <div className="flex items-center justify-center h-[60px] pt-4 max-w-[160px] mx-auto">
             <Image
@@ -52,13 +53,15 @@ export default function SidebarModal({ route }: route) {
           <div
             className={`flex flex-col justify-between pb-5 overflow-y-auto h-[93.5%] 
           ${route === 0 && `player__sidebar--height`}`}
-            // change numbering later
           >
             <div className="flex-grow flex-shrink basis-0 mt-10">
               <a
                 className="flex items-center h-14 text-[#032b41] hover:bg-[#f0efef] 
-          mb-2 cursor-pointer"
-                onClick={() => {router.push("/for-you"); dispatch(closeSidebarModal()) }}
+                mb-2 cursor-pointer"
+                onClick={() => {
+                  router.push("/for-you");
+                  dispatch(closeSidebarModal());
+                }}
               >
                 <div
                   className={`${
@@ -72,8 +75,11 @@ export default function SidebarModal({ route }: route) {
               </a>
               <a
                 className="flex items-center h-14 text-[#032b41] hover:bg-[#f0efef] 
-          mb-2 cursor-pointer"
-                onClick={() => {router.push("/library"); dispatch(closeSidebarModal())}}
+                mb-2 cursor-pointer"
+                onClick={() => {
+                  router.push("/library");
+                  dispatch(closeSidebarModal());
+                }}
               >
                 <div
                   className={`${
@@ -104,8 +110,11 @@ export default function SidebarModal({ route }: route) {
             <div>
               <a
                 className="flex items-center h-14 text-[#032b41] mb-2 
-          hover:bg-[#f0efef] cursor-pointer"
-                onClick={() => {router.push("/settings"); dispatch(closeSidebarModal())}}
+              hover:bg-[#f0efef] cursor-pointer"
+                onClick={() => {
+                  router.push("/settings");
+                  dispatch(closeSidebarModal());
+                }}
               >
                 <div
                   className={`${
@@ -126,7 +135,7 @@ export default function SidebarModal({ route }: route) {
               </a>
               <div
                 className="flex items-center h-14 text-[#032b41] mb-2 cursor-pointer
-           hover:bg-[#f0efef]"
+              hover:bg-[#f0efef]"
                 onClick={handleSignOut}
               >
                 <div className="bg-transparent w-[5px] h-full mr-4" />

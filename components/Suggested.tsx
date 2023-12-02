@@ -1,30 +1,11 @@
 import { useEffect, useState } from "react";
 import Book from "./ui/Book";
 import Skeleton from "./ui/Skeleton";
-
-// We do interfaces in typescript so that it validates the property of the fetched api data, instead of not assuring if the data is a string, boolean, or some other property (like displaying dynamic data in react)
-interface Book {
-  id: string;
-  author: string;
-  title: string;
-  subTitle: string;
-  imageLink: string;
-  audioLink: string;
-  totalRating: Number;
-  averageRating: Number;
-  keyIdeas: Number;
-  type: string;
-  status: string;
-  subscriptionRequired: boolean;
-  summary: string;
-  tags: string[];
-  bookDescription: string;
-  authorDescription: string;
-}
+import { BookObject } from "@/bookObject";
 
 export default function Suggested() {
   const [skelLoad, setSkelLoad] = useState<boolean>(false);
-  const [suggested, setSuggested] = useState<Book[]>([]);
+  const [suggested, setSuggested] = useState<BookObject[]>([]);
 
   async function fetchData() {
     setSkelLoad(true);

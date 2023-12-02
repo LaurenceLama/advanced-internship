@@ -71,8 +71,8 @@ export default function Id() {
   return (
     <div className="relative flex flex-col md:ml-[200px]">
       <SearchBar />
-      <Sidebar route={0} />
-      <SidebarModal route={0} />
+      <Sidebar route={5} />
+      <SidebarModal route={5} />
       <AuthModal />
       <div className="max-w-[1100px] w-full px-6 mx-auto">
         <div className="py-6 w-full">
