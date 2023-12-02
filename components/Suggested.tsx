@@ -21,11 +21,7 @@ export default function Suggested() {
     fetchData();
   }, []);
   return (
-    <div>
-      <div className="text-[22px] mb-4 text-[#032b41] font-bold">
-        Suggested Books
-      </div>
-      <div className="font-light text-[#394547] mb-7">Explore these books</div>
+    <div className="overflow-x-auto">
 
       <div className="flex mb-8 gap-4">
         {!skelLoad ? (

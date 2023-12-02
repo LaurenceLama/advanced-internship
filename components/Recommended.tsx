@@ -21,13 +21,8 @@ export default function Recommended() {
     fetchData();
   }, []);
   return (
-    <div>
-      <div className="text-[22px] mb-4 text-[#032b41] font-bold">
-        Recommended For You
-      </div>
-      <div className="font-light text-[#394547] mb-7">
-        We think you will like these
-      </div>
+    <div className="overflow-x-auto">
+      
 
       <div className="flex mb-8 gap-4">
         {!skelLoad ? (

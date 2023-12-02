@@ -19,7 +19,21 @@ export default function Foryou() {
       <div className="max-w-[1100px] w-full px-6 mx-auto">
         <div className="py-6 w-full">
           <Selected />
+
+          <div className="text-[22px] mb-4 text-[#032b41] font-bold">
+            Recommended For You
+          </div>
+          <div className="font-light text-[#394547] mb-7">
+            We think you will like these
+          </div>
           <Recommended />
+
+          <div className="text-[22px] mb-4 text-[#032b41] font-bold">
+            Suggested Books
+          </div>
+          <div className="font-light text-[#394547] mb-7">
+            Explore these books
+          </div>
           <Suggested />
         </div>
       </div>
