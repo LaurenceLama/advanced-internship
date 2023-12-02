@@ -2,7 +2,7 @@ import { BookObject } from "@/bookObject";
 import SearchBar from "@/components/SearchBar";
 import Sidebar from "@/components/Sidebar";
 import AuthModal from "@/components/modal/AuthModal";
-import SidebarModal from "../../components/modal/SidebarModal";
+import SidebarModal from "../../../next-with-typescript/components/modal/SidebarModal";
 import Skeleton from "@/components/ui/Skeleton";
 import { openLoginModal } from "@/redux/modalSlice";
 import axios from "axios";
