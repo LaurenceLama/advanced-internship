@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { auth, initFirebase } from "@/firebase";
 import { getPremiumStatus } from "@/checkStatus";
-import SidebarModal from "@/components/modal/SidebarModal";
+import SidebarModal from "@/components/SidebarModal";
 import { premiumType } from "@/premiumType";
 import Skeleton from "@/components/ui/Skeleton";
 
