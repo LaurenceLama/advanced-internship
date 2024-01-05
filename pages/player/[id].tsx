@@ -42,7 +42,7 @@ export default function Id() {
       {!skelLoad ? (
         <div
           className="relative w-full overflow-y-auto
-          summary__custom-width"
+          summary__custom-height"
         >
           <audio src={summ?.audioLink}></audio>
           <div className="p-6 max-w-[800px] mx-auto whitespace-pre-line">

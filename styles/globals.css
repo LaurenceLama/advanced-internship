@@ -630,7 +630,7 @@ Player page custom height
   height: calc(100vh - 130px);
 }
 
-.summary__custom-width {
+.summary__custom-height {
   height: calc(100vh - 160px);
 }
 
